@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Automatic Tab Closer</title>
+    <link href="options.css" rel="stylesheet" />
+    <script src="../scripts/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <!--<link rel="stylesheet" href="../css/bootstrap-theme.min.css">-->
+    <script src="../scripts/bootstrap.bundle.js"></script>
+    <link href="../css/bootstrap-icons.css" rel="stylesheet" />
+
+    <script src="options.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+                <h2>Configure Auto Tab Closer</h2>
+            </div>
+            <div class="form-group col-sm-3">
+                <form role="form">
+                    <label for="test_mode">
+                        Enable test mode for all entries
+                    </label>
+                    <input type="checkbox"
+                           class="form-control"
+                           value=""
+                           id="test_mode" />
+
+                </form>
+            </div>
+
+
+        </div>
+
+
+        <div class="row tab_table">
+            <div class="col">
+                <h3>List of tabs to close</h3>
+                <table id="tabTable"
+                       class="table table-bordered table-condensed table-striped">
+                    <thead>
+                        <tr>
+                            <th>Edit</th>
+                            <th>Name</th>
+                            <th>Config</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </div>
+        <div class="row no_tab_entries">
+            <div class="col">
+                <h3>No configured tabs (add one below)</h3>
+            </div>
+        </div>
+        <div class="row add_button">
+            <div class="col">
+
+            </div>
+        </div>
+        <button
+                type='button'
+                class="btn btn-default edit_btn btn-primary"
+                id="btn_new_item">Add Tab to Close
+        </button>
+        <div class="row spacer">
+            <div class="col">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col" id="add_edit_box">
+                <div class="card">
+                    <div class="card-header">
+                        Tab Information
+                    </div>
+                    <div class="card-body">
+                        <form role="form" class="form-horizontal">
+
+                            <div class="form-group form-row">
+                                <label for="item_name" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+
+                                    <div class="input-group">
+                                        <input type="text"
+                                               class="form-control"
+                                               value=""
+                                               id="item_name" />
+
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">Test Mode</div>
+                                            <div class="input-group-text">
+                                                <input type="checkbox"
+                                                       aria-label="Test Mode"
+                                                       id="tab_test_mode" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <small id="help_text_name" class="form-text help-muted">Enter a name for reference (not used for determining the tab to close).  You can also select Test Mode to disable closing of the tab to validate the url and selector.</small>
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group form-row">
+                                <label for="item_url" class="col-sm-2 col-form-label">URL</label>
+                                <div class="col-sm-10">
+
+                                    <div class="input-group">
+                                        <input type="text"
+                                               class="form-control"
+                                               value=""
+                                               id="item_url" />
+
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">Regex</div>
+                                            <div class="input-group-text">
+                                                <input type="checkbox"
+                                                       aria-label="Regex URL"
+                                                       id="is_regex" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <small id="help_text_url" class="form-text help-muted">Enter the url or regex of the tab to close (if a regex, make sure to check the "REGEX" box)</small>
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group form-row">
+                                <label for="item_selector" class="col-sm-2 col-form-label">Selector</label>
+                                <div class="col-sm-10">
+
+                                    <div class="input-group">
+                                        <input type="text"
+                                               class="form-control"
+                                               value=""
+                                               id="item_selector" />
+
+                                    </div>
+                                    <small id="help_text_selector" class="form-text help-muted">(Optional) Enter a jquery style selector placeholder to validate tab with the contents of the page.</small>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="form-group form-row">
+                                <label for="delay_secs" class="col-sm-2 col-form-label">Delay</label>
+                                <div class="col-sm-10">
+
+                                    <div class="input-group">
+                                        <input type="number"
+                                               class="form-control"
+                                               value="0"
+                                               id="delay_secs" />
+
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">Cancellable</div>
+                                            <div class="input-group-text">
+                                                <input type="checkbox"
+                                                       aria-label="Cancel Delay"
+                                                       id="delay_cancel" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <small id="help_text_delay" class="form-text help-muted">(Optional) Enter a delay (in seconds) and check to allow the user to cancel the operation.</small>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <label for="add_saved">
+                                    Add default entry
+                                </label>
+                                <select name="saves"
+                                        class="form-control"
+                                        id="add_saved">
+                                </select>
+                            </div>
+
+
+                        </form>
+
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button type="button" id="updateButton"
+                                        class="btn btn-primary">
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+        <div class="row">
+            <div class="col" id="config_box">
+                <div class="card">
+                    <div class="card-header">
+                        Configuration JSON
+                    </div>
+                    <div class="card-body">
+                        <form role="form" class="form-horizontal">
+
+                            <div class="form-group form-row">
+                                <label for="config_field" class="col-sm-2 col-form-label">Config</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <textarea
+                                                class="form-control"
+                                                id="config_field" rows="10"></textarea>
+
+                                    </div>
+                                    <small id="help_text_config" class="form-text help-muted">Copy this section to backup the config, or paste in a config and click "save" to update the config.</small>
+
+                                </div>
+
+                            </div>
+
+
+
+                        </form>
+
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button type="button" id="save_config"
+                                        class="btn btn-primary">
+                                    Overwrite Config
+                                </button>
+                                <button type="button" id="append_config"
+                                        class="btn btn-primary">
+                                    Append Config
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "AutoTabCloser",
+  "version": "0.0.0.1",
+  "manifest_version": 3,
+  "description": "An extension that will automatically close tabs",
+  "icons": {
+    "32": "icons/ATC_Off_32.png",
+    "48": "icons/ATC_Off_48.png",
+    "128": "icons/ATC_Off_128.png"
+  },
+  "background": {
+    "service_worker": "background/background.js"
+  },
+  "permissions": [ "storage" , "tabs", "notifications", "scripting"],
+  "options_page": "options/options.html"
+}
