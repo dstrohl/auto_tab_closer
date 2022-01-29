@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <title>Automatic Tab Closer</title>
     <link href="options.css" rel="stylesheet" />
@@ -11,7 +11,10 @@
     <script src="../scripts/bootstrap.bundle.js"></script>
     <link href="../css/bootstrap-icons.css" rel="stylesheet" />
 
-    <script src="options.js"></script>
+
+    <!--<script src="../defaults.js"></script>-->
+    <!--<script src="../scripts/common.js"></script>-->
+    <script type="module" src="options.js"></script>
 
 </head>
 
@@ -23,13 +26,27 @@
             </div>
             <div class="form-group col-sm-3">
                 <form role="form">
-                    <label for="test_mode">
-                        Enable test mode for all entries
-                    </label>
-                    <input type="checkbox"
-                           class="form-control"
-                           value=""
-                           id="test_mode" />
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox"
+                               class="form-control custom-control-input"
+                               value=""
+                               id="test_mode_field" />
+                        <label for="test_mode_field" class="custom-control-label" >
+                            All Test Mode
+                        </label>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox"
+                               class="form-control custom-control-input"
+                               value=""
+                               id="enabled_field" />
+                        <label for="enabled_field"  class="custom-control-label">
+                            Plugin Enabled
+                        </label>
+
+                    </div>
+
+
 
                 </form>
             </div>
@@ -37,6 +54,11 @@
 
         </div>
 
+        <!--
+        *********************************************************
+        Tab Listing Table
+        *********************************************************
+        -->
 
         <div class="row tab_table">
             <div class="col">
@@ -67,207 +89,19 @@
         </div>
         <button
                 type='button'
-                class="btn btn-default edit_btn btn-primary"
+                class="btn btn-default add_btn btn-primary"
                 id="btn_new_item">Add Tab to Close
+        </button>
+        <button
+                type='button'
+                class="btn btn-default cfg_btn btn-primary"
+                id="btn_show_config">Show Config for Import/Export
         </button>
         <div class="row spacer">
             <div class="col">
                 <div>&nbsp;</div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col" id="add_edit_box">
-                <div class="card">
-                    <div class="card-header">
-                        Tab Information
-                    </div>
-                    <div class="card-body">
-                        <form role="form" class="form-horizontal">
-
-                            <div class="form-group form-row">
-                                <label for="item_name" class="col-sm-2 col-form-label">Name</label>
-                                <div class="col-sm-10">
-
-                                    <div class="input-group">
-                                        <input type="text"
-                                               class="form-control"
-                                               value=""
-                                               id="item_name" />
-
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">Test Mode</div>
-                                            <div class="input-group-text">
-                                                <input type="checkbox"
-                                                       aria-label="Test Mode"
-                                                       id="tab_test_mode" />
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <small id="help_text_name" class="form-text help-muted">Enter a name for reference (not used for determining the tab to close).  You can also select Test Mode to disable closing of the tab to validate the url and selector.</small>
-
-                                </div>
-
-                            </div>
-
-                            <div class="form-group form-row">
-                                <label for="item_url" class="col-sm-2 col-form-label">URL</label>
-                                <div class="col-sm-10">
-
-                                    <div class="input-group">
-                                        <input type="text"
-                                               class="form-control"
-                                               value=""
-                                               id="item_url" />
-
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">Regex</div>
-                                            <div class="input-group-text">
-                                                <input type="checkbox"
-                                                       aria-label="Regex URL"
-                                                       id="is_regex" />
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <small id="help_text_url" class="form-text help-muted">Enter the url or regex of the tab to close (if a regex, make sure to check the "REGEX" box)</small>
-
-                                </div>
-
-                            </div>
-
-                            <div class="form-group form-row">
-                                <label for="item_selector" class="col-sm-2 col-form-label">Selector</label>
-                                <div class="col-sm-10">
-
-                                    <div class="input-group">
-                                        <input type="text"
-                                               class="form-control"
-                                               value=""
-                                               id="item_selector" />
-
-                                    </div>
-                                    <small id="help_text_selector" class="form-text help-muted">(Optional) Enter a jquery style selector placeholder to validate tab with the contents of the page.</small>
-
-                                </div>
-
-                            </div>
-
-
-
-                            <div class="form-group form-row">
-                                <label for="delay_secs" class="col-sm-2 col-form-label">Delay</label>
-                                <div class="col-sm-10">
-
-                                    <div class="input-group">
-                                        <input type="number"
-                                               class="form-control"
-                                               value="0"
-                                               id="delay_secs" />
-
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">Cancellable</div>
-                                            <div class="input-group-text">
-                                                <input type="checkbox"
-                                                       aria-label="Cancel Delay"
-                                                       id="delay_cancel" />
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <small id="help_text_delay" class="form-text help-muted">(Optional) Enter a delay (in seconds) and check to allow the user to cancel the operation.</small>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="form-group">
-                            </div>
-                            <div class="form-group">
-                                <label for="add_saved">
-                                    Add default entry
-                                </label>
-                                <select name="saves"
-                                        class="form-control"
-                                        id="add_saved">
-                                </select>
-                            </div>
-
-
-                        </form>
-
-                    </div>
-
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <button type="button" id="updateButton"
-                                        class="btn btn-primary">
-                                    Add
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
-
-
-
-        <div class="row">
-            <div class="col" id="config_box">
-                <div class="card">
-                    <div class="card-header">
-                        Configuration JSON
-                    </div>
-                    <div class="card-body">
-                        <form role="form" class="form-horizontal">
-
-                            <div class="form-group form-row">
-                                <label for="config_field" class="col-sm-2 col-form-label">Config</label>
-                                <div class="col-sm-10">
-                                    <div class="input-group">
-                                        <textarea
-                                                class="form-control"
-                                                id="config_field" rows="10"></textarea>
-
-                                    </div>
-                                    <small id="help_text_config" class="form-text help-muted">Copy this section to backup the config, or paste in a config and click "save" to update the config.</small>
-
-                                </div>
-
-                            </div>
-
-
-
-                        </form>
-
-                    </div>
-
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <button type="button" id="save_config"
-                                        class="btn btn-primary">
-                                    Overwrite Config
-                                </button>
-                                <button type="button" id="append_config"
-                                        class="btn btn-primary">
-                                    Append Config
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
 
 
 
@@ -276,5 +110,329 @@
 
 
     </div>
+
+
+    <!--
+*********************************************************
+Row Configuration BOX
+*********************************************************
+-->
+
+    <div class="modal fade" id="add_edit_modal" data-backdrop="'static" data-keyboard="false" tabindex="-1" aria-labelledby="add_edit_modal_label" aria-hidden="true">
+        <div class="modal-dialog modal-xl" id="add_edit_box">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title" id="add_edit_modal_label">
+                        <h3>Configure tab to close</h3>
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="url_enabled_field" checked>
+                            <label class="custom-control-label" for="url_enabled_field">Enabled</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger" id="edit_error_notice">
+                        <button id="edit_force_save" type="button" class="btn-danger" aria-label="Force Save">Force Save</button>
+                    </div>
+                    <form role="form" class="form-horizontal">
+                        <!--
+                        *********************************************************
+                        Name Field
+                        *********************************************************
+                        -->
+
+                        <div class="form-group form-row">
+                            <label for="name_field" class="col-sm-2 col-form-label">Name</label>
+                            <div class="col-sm-10">
+
+                                <div class="input-group">
+                                    <input type="text"
+                                           class="form-control"
+                                           value=""
+                                           id="name_field" />
+
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">Test Mode</div>
+                                        <div class="input-group-text">
+                                            <input type="checkbox"
+                                                   aria-label="Test Mode"
+                                                   id="url_test_mode_field" />
+
+                                        </div>
+                                    </div>
+                                    <div class="invalid-feedback" id="name_field_feedback"></div>
+                                </div>
+                                <small id="help_text_name" class="form-text help-muted">Enter a name for reference (not used for determining the tab to close).  You can also select Test Mode to disable closing of the tab to validate the url and selector.</small>
+
+                            </div>
+
+                        </div>
+                        <!--
+                        *********************************************************
+                        URL Fields
+                        *********************************************************
+                        -->
+
+                        <div class="form-group form-row">
+                            <label for="url_field" class="col-sm-2 col-form-label">URL</label>
+                            <div class="col-sm-10">
+
+                                <div class="input-group">
+                                    <input type="text"
+                                           class="form-control"
+                                           value=""
+                                           id="url_field" />
+
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">Regex</div>
+                                        <div class="input-group-text">
+                                            <input type="checkbox"
+                                                   aria-label="Regex URL"
+                                                   id="url_is_regex_field" />
+
+                                        </div>
+                                    </div>
+                                    <div class="invalid-feedback" id="url_field_feedback"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <small id="help_text_url" class="form-text help-muted">Enter the url or regex of the tab to close (if a regex, make sure to check the "REGEX" box)</small>
+                                    </div>
+                                    <div class="col-sm-auto" id="url_test_box_button">
+                                        <button class="btn  btn-secondary btn-sm" type="button" data-toggle="collapse" data-target="#url_check_box" aria-expanded="false" aria-controls="collapseExample">
+                                            Check Configured URL
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="collapse" id="url_check_box">
+                                    <div class="card card-body">
+                                        <div class="form-group row">
+                                            <label for="good_url_test_field" class="col-sm-3 col-form-label">Good URLS</label>
+                                            <div class="col-sm-9">
+                                                <div class="input-group">
+                                                    <textarea rows="3" id="good_url_test_field" class="form-control"></textarea>
+                                                    <div class="invalid-feedback" id="good_url_test_field_feedback"></div>
+                                                </div>
+                                                <small class="form-text help-muted">Enter a list of URLS to validate against the configuration, one per line. These should all match the expected url.</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="bad_url_test_field" class="col-sm-3 col-form-label">Bad URLS</label>
+                                            <div class="col-sm-9">
+                                                <div class="input-group">
+                                                    <textarea rows="3" id="bad_url_test_field" class="form-control"></textarea>
+                                                    <div class="invalid-feedback" id="bad_url_test_field_feedback"></div>
+                                                </div>
+                                                <small class="form-text help-muted">Enter a list of URLS to validate against the configuration, one per line. These should all NOT match the expected url.</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <!--
+                        *********************************************************
+                        Selector Fields
+                        *********************************************************
+                        -->
+
+                        <div class="form-group form-row">
+                            <label for="selector_field" class="col-sm-2 col-form-label">Selector</label>
+                            <div class="col-sm-10">
+
+                                <div class="input-group">
+                                    <input type="text"
+                                           class="form-control"
+                                           value=""
+                                           id="selector_field" />
+                                    <div class="invalid-feedback" id="selector_field_feedback"></div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <small id="help_text_selector" class="form-text help-muted">(Optional) Enter a jquery style selector placeholder to validate tab with the contents of the page.</small>
+                                    </div>
+                                    <div class="col-sm-auto" id="selector_test_box_button">
+                                        <button class="btn  btn-secondary btn-sm" type="button" data-toggle="collapse" data-target="#selector_test_box" aria-expanded="false" aria-controls="collapseExample">
+                                            Check Configured Selector
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="collapse" id="selector_test_box">
+                                    <div class="card card-body">
+                                        <div class="form-group row">
+                                            <label for="selector_test_field" class="col-sm-3 col-form-label">Page HTML</label>
+                                            <div class="col-sm-9">
+                                                <div class="input-group">
+                                                    <textarea rows="5" id="selector_test_field" class="form-control"></textarea>
+                                                    <div class="invalid-feedback" id="selector_test_field_feedback"></div>
+                                                </div>
+                                                <small class="form-text help-muted">Enter HTML that will be used to check the configured selector.  Note, no scripts will be run against this, so matches must be present in the text.</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+
+                        </div>
+
+
+                        <!--
+                        *********************************************************
+                        Delay Fields
+                        *********************************************************
+                        -->
+
+                        <div class="form-group form-row">
+                            <label for="delay_field" class="col-sm-2 col-form-label">Delay</label>
+                            <div class="col-sm-10">
+
+                                <div class="input-group">
+                                    <input type="number"
+                                           class="form-control"
+                                           value="0"
+                                           id="delay_field" />
+
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">Cancellable</div>
+                                        <div class="input-group-text">
+                                            <input type="checkbox"
+                                                   aria-label="Cancel Delay"
+                                                   id="allow_cancel_field" />
+
+                                        </div>
+                                    </div>
+                                    <div class="invalid-feedback" id="delay_field_feedback"></div>
+                                </div>
+                                <small id="help_text_delay" class="form-text help-muted">(Optional) Enter a delay (in seconds) and check to allow the user to cancel the operation.</small>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+                <!--
+                *********************************************************
+                Tab Button
+                *********************************************************
+                -->
+
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button type="button" id="updateButton"
+                                    class="btn btn-primary">
+                                Add
+                            </button>
+                            <button type="button" id="cancel_add"
+                                    class="btn btn-danger">
+                                Cancel
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <!--
+*********************************************************
+JSON Configuration BOX
+*********************************************************
+-->
+
+    <!-- Modal -->
+    <div class="modal fade" id="config_edit_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="config_edit_box_label" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="config_edit_label">Configuration</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger" id="config_error_notice">
+                        <div id="config_error_notice_text"></div>
+                        <button id="config_force_save" type="button" class="btn-danger" aria-label="Force Save">Force Save</button>
+                    </div>
+                    <div class="alert alert-danger" id="config_json_error_notice">
+                    </div>
+                    <form role="form" id="config_form" class="form-horizontal">
+
+                        <div class="form-group form-row">
+                            <label for="config_field" class="col-sm-2 col-form-label">
+                                Config</br>
+                                <i id="copy_to_clipboard" class="bi-clipboard" data-toggle="tooltip" data-placement="bottom" title="Copy to Clipboard"></i>
+                                <i id="upload_config" class="bi-upload" data-toggle="tooltip" data-placement="bottom" title="Upload from file"></i>
+                                <!--<form id="upload">-->
+                                <input type="file" id="upload_input" accept=".json" style="display:none">
+                                <i id="download_config" class="bi-download" data-toggle="tooltip" data-placement="bottom" title="Download to file"></i>
+
+                                    <!--<button>Upload</button> -->
+                                <!--</form>-->
+
+                            </label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                        <textarea
+                                                class="form-control"
+                                                id="config_field"
+                                                aria-describedby="invalid_config_feedback"
+                                                rows="10"></textarea>
+
+                                    <div class="invalid-feedback" id="config_field_feedback">
+                                    </div>
+
+                                </div>
+                                <small id="help_text_config" class="form-text help-muted">You can download a copy of the config, upload a backup, or copy this section to backup the config, or paste in a config and click "save" to update the config.</small>
+                            </div>
+
+                        </div>
+
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="save_config"
+                            class="btn btn-primary">
+                        Overwrite Config
+                    </button>
+                    <button type="button" id="append_config"
+                            class="btn btn-primary">
+                        Update Config
+                    </button>
+                    <button type="button" id="cancel_config"
+                            class="btn btn-danger">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div>
+    <a href="https://github.com/dstrohl/auto_tab_closer">Auto Tab Closer</a> <span id="copyright_symb">&copy;</span>2022 WindJammer Consulting Group.
+
+</div>
 </body>
 </html>

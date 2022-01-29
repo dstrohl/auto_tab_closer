@@ -1,0 +1,87 @@
+{
+  "loaded_default": false,
+  "test_mode": false,
+  "enabled": true,
+  "urls": [
+    {
+      "enabled": true,
+      "name": "regex_url_test",
+      "url": "https://example.com/close_test.*",
+      "good_url_test": "https://example.com/close_test.foobar\nhttps://example.com/close_test.test",
+      "bad_url_test": "https://example.com/fail_close_test.foobar",
+      "selector_test": "",
+      "url_is_regex": true,
+      "url_test_mode": true,
+      "jquery_selector": "",
+      "delay": 5,
+      "allow_cancel": true
+    },
+    {
+      "enabled": true,
+      "name": "selector_test",
+      "url": "https://example.com/close_test.*",
+      "good_url_test": "https://example.com/close_test.foobar\nhttps://example.com/close_test.test",
+      "bad_url_test": "https://example.com/fail_close_test.foobar",
+      "selector_test": "<html><title>Fail_example</title></html>",
+      "url_is_regex": true,
+      "url_test_mode": true,
+      "jquery_selector": "title:contains('Fail_example')",
+      "delay": 5,
+      "allow_cancel": true
+
+    },
+    {
+      "enabled": true,
+      "name": "selector_fail_test",
+      "url": "https://example.com/close_test.*",
+      "good_url_test": "https://example.com/close_test.foobar\nhttps://example.com/close_test.test",
+      "bad_url_test": "https://example.com/fail_close_test.foobar",
+      "selector_test": "<html><title>should fail</title></html>",
+      "url_is_regex": true,
+      "url_test_mode": true,
+      "jquery_selector": "title:contains('Fail_example')",
+      "delay": 5,
+      "allow_cancel": true
+    },
+    {
+      "enabled": true,
+      "name": "no url test",
+      "url": "",
+      "good_url_test": "",
+      "bad_url_test": "",
+      "selector_test": "",
+      "url_is_regex": false,
+      "url_test_mode": true,
+      "jquery_selector": "",
+      "delay": 5,
+      "allow_cancel": true
+    },
+    {
+      "enabled": true,
+      "name": "delay fail test",
+      "url": "https://example.com/close_test.*",
+      "good_url_test": "",
+      "bad_url_test": "",
+      "selector_test": "",
+      "url_is_regex": true,
+      "url_test_mode": true,
+      "jquery_selector": "",
+      "delay": 0,
+      "allow_cancel": true
+    },
+    {
+      "enabled": true,
+      "name": "url_fail_test",
+      "url": "https://example.com/close_test.*",
+      "good_url_test": "https://example.com/no_close_test.foobar\nhttps://example.com/close_test.test",
+      "bad_url_test": "https://example.com/close_test.foobar",
+      "selector_test": "",
+      "url_is_regex": true,
+      "url_test_mode": true,
+      "jquery_selector": "",
+      "delay": 5,
+      "allow_cancel": true
+
+    }
+   ]
+}

@@ -1,0 +1,34 @@
+{
+  "loaded_default": true,
+  "test_mode": false,
+  "enabled": true,
+  "urls": [
+    {
+      "url_enabled": true,
+      "name": "Edge",
+      "url": "https://\\w*\\.vpn\\.f5\\.com/public/oauth_done.html",
+      "good_url_test": "",
+      "bad_url_test": "",
+      "selector_test": "",
+      "url_is_regex": true,
+      "url_test_mode": true,
+      "selector": "",
+      "delay": 5,
+      "allow_cancel": true
+    },
+    {
+      "url_enabled": true,
+      "name": "Zoom",
+      "url": "https://\\.zoom.us/j/.*#success",
+      "good_url_test": "",
+      "bad_url_test": "",
+      "selector_test": "",
+      "url_is_regex": true,
+      "url_test_mode": true,
+      "selector": "title:contains('Launch Meeting - Zoom')",
+      "delay": 5,
+      "allow_cancel": true
+
+    }
+  ]
+}
