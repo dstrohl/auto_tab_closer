@@ -1,19 +1,9 @@
 
-export const default_options = {
+const default_options = {
     loaded_default: false,
     test_mode: false,
     enabled: true,
     urls: [
-        {
-            name: "None",
-                url: "",
-            url_is_regex: false,
-            url_test_mode: false,
-            use_selector: false,
-            jquery_selector: "",
-            delay: 5,
-            allow_cancel: true
-        },
         {
             name: "Edge",
                 url: "https://\\w*\\.vpn\\.f5\\.com/public/oauth_done.html",
@@ -39,3 +29,5 @@ export const default_options = {
     ]
 
 }
+
+export { default_options }
